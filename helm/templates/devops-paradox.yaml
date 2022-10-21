@@ -1,19 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-hasura
+  name: devops-paradox
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: todo-prod-env
+  project: production
   source:
-    path: kustomize
-    repoURL: https://github.com/cloudnativeentrepreneur/demo-hasura
+    path: helm
+    repoURL: https://github.com/vfarcic/devops-paradox.git
     targetRevision: HEAD
-    kustomize:
-      images:
-      - ghcr.io/cloudnativeentrepreneur/demo-hasura:latest
+    helm:
+      values: |
+        image:
+          tag: latest
+        ingress:
+          host: devopsparadox.com
+      version: v3
   destination:
     namespace: production
     server: https://kubernetes.default.svc
@@ -21,4 +25,3 @@ spec:
     automated:
       selfHeal: true
       prune: true
-      allowEmpty: true

@@ -1,20 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: todo-prod-env
+  name: production
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: todo-prod-env project
+  description: Production project
   sourceRepos:
   - '*'
   destinations:
   - namespace: '*'
-    server: '*'
+    server: https://kubernetes.default.svc
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
   namespaceResourceWhitelist:
   - group: '*'
     kind: '*'
+

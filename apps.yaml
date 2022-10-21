@@ -1,21 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: todo-prod-env
+  name: production
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: todo-prod-env
+  project: production
   source:
-    repoURL: https://github.com/CloudNativeEntrepreneur/todo-prod-env
+    repoURL: https://github.com/cloudnativeentrepreneur/demo-prod-env.git
     targetRevision: HEAD
-    path: applications
+    path: helm
   destination:
     server: https://kubernetes.default.svc
-    namespace: todo-prod-env
+    namespace: production
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
-      allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true
+
