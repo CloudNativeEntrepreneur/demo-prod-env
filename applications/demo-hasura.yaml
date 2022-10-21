@@ -6,7 +6,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: production
+  project: todo-prod-env
   source:
     path: kustomize
     repoURL: https://github.com/cloudnativeentrepreneur/demo-hasura

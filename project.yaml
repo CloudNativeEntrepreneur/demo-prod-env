@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: todo-prod
+  name: todo-prod-env
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: todo-prod project
+  description: todo-prod-env project
   sourceRepos:
   - '*'
   destinations:
